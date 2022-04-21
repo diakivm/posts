@@ -31,7 +31,7 @@ export const CustomPagination: FC<IPaginationProps> = ({ totalPages, currentPage
             page={currentPage}
             onChange={handleChange}
             variant="outlined"
-            color="primary"
+            color="secondary"
          />
       </Box>
    )

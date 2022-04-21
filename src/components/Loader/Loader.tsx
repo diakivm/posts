@@ -12,7 +12,7 @@ export const Loader = () => {
             left: 'calc(50% - 25px)'
          }}
       >
-         <CircularProgress size={50} />
+         <CircularProgress size={50} color='secondary' />
       </Box>
    )
 }

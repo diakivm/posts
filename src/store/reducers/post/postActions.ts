@@ -59,7 +59,7 @@ export function fetchPosts(page: number) {
 
             const response = await postsService.getPosts(page)
             dispatch(setPostsAction(response.data))
-            dispatch(setTotalPagesAction(10))
+            dispatch(setTotalPagesAction(11))
             dispatch(setCurrentPageAction(page))
 
             await Dalay.wait(1)
@@ -67,6 +67,19 @@ export function fetchPosts(page: number) {
             dispatch(setErrorAction((e as Error).toString()))
         } finally {
             dispatch(setIsLoadingAction(false))
+        }
+    }
+}
+
+
+export function postPost(userId: number, title: string, body: string) {
+    return async (dispatch: Dispatch<postsActions>) => {
+        try {
+            const response = await postsService.postPost(userId, title, body)
+            console.log(response);
+            await Dalay.wait(1)
+        } catch (e) {
+            dispatch(setErrorAction((e as Error).toString()))
         }
     }
 }

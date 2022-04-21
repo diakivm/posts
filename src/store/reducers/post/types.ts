@@ -1,4 +1,3 @@
-import { IComment } from './../../../models/IComment';
 import { IPost } from "../../../models/IPost"
 
 

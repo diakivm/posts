@@ -4,6 +4,7 @@ import { PaginatedPostList } from '../../components/Post/PaginatedPostList'
 import { CustomModal } from '../../components/CustomModal/CustomModal'
 
 import { Box, Button } from '@mui/material'
+import { NewPostForm } from '../../components/Post/NewPostForm'
 
 
 export const PostsPage: FC = () => {
@@ -16,6 +17,7 @@ export const PostsPage: FC = () => {
             <Button
                size="small"
                variant='contained'
+               color="secondary"
                onClick={() => setIsOpenModal(true)}
             >
                add post
@@ -24,7 +26,7 @@ export const PostsPage: FC = () => {
                isOpened={isOpenModal}
                onChangeOpened={setIsOpenModal}
             >
-               <h1>asdasdasd</h1>
+               <NewPostForm />
             </CustomModal>
          </Box>
          <PaginatedPostList />

@@ -72,9 +72,10 @@ export const Post: FC<IPostProps> = ({ post }) => {
                <LoadingButton
                   size="small"
                   variant='outlined'
+                  color='secondary'
                   loading={isCommentsLoading} onClick={fetchComments}
                >
-                  Load comments
+                  Show comments
                </LoadingButton>
             </CardActions>
          }
@@ -82,8 +83,9 @@ export const Post: FC<IPostProps> = ({ post }) => {
             data.isWasLoading && <CardContent sx={{ marginLeft: '10%' }}>
                <CardActions sx={{ justifyContent: 'flex-end' }}>
                   <Button
-                     size="small"
+                     size='small'
                      variant='outlined'
+                     color='secondary'
                      onClick={() => setIsCommentsHide(!isCommentsHide)}
                   >
                      {isCommentsHide ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
