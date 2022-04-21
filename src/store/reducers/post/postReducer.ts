@@ -17,11 +17,18 @@ export const postReducer = (state = initialState, action: postsActions): postsSt
             return { ...state, posts: action.payload }
             break;
 
+        case postsActionEnum.SET_POST:
+            return {
+                ...state,
+                posts: [action.payload, ...state.posts.filter((item, index) => index > state.total_pages - 2 ? false : true)]
+            }
+            break;
+
         case postsActionEnum.SET_ERROR:
             return { ...state, postsError: action.payload }
             break;
 
-        case postsActionEnum.SET_IS_LOADING:
+        case postsActionEnum.SET_IS_POSTS_LOADING:
             return { ...state, isPostsLoading: action.payload }
             break;
 

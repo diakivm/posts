@@ -19,6 +19,8 @@ import Dalay from '../../utils/Dalay';
 import { IPost } from '../../models/IPost'
 import { IComment } from '../../models/IComment';
 import { CommentsList } from '../Comment/CommentsList';
+import { IUser } from '../../models/IUser';
+import userService from '../../API/userService';
 
 
 
@@ -40,16 +42,28 @@ export const Post: FC<IPostProps> = ({ post }) => {
    const [fetchComments, isCommentsLoading, errorComments] = useFetching(async () => {
       const response = await commentService.getCommentsByPostId(post.id)
       await Dalay.wait(1)
-      setData({ comments: response.data, isWasLoading: true })
+      setData({ comments: response.data as IComment[], isWasLoading: true })
    })
 
+
+   const [user, setUser] = React.useState<IUser>({ username: 'User' } as IUser)
+   const [fetchUser, isUserLoading, errorUser] = useFetching(async () => {
+      const response = await userService.getUserById(post.userId)
+      setUser(response.data as IUser)
+   })
+
+
+   React.useEffect(() => {
+      fetchUser()
+   }, [])
+
    return (
-      <Card >
+      <Card>
          <CardHeader
-            sx={{ paddingBottom: 0 }}
+            sx={style.cardHeader}
             avatar={
                <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe">
-                  U
+                  {user?.username[0].toUpperCase()}
                </Avatar>
             }
             action={
@@ -57,10 +71,10 @@ export const Post: FC<IPostProps> = ({ post }) => {
                   <MoreVertIcon />
                </IconButton>
             }
-            title='Username'
+            title={user && user?.username}
          />
          <CardContent>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+            <Typography sx={style.textTitle} color="text.secondary" gutterBottom>
                {post.title}
             </Typography>
             <Typography variant="h5" component="div">
@@ -68,7 +82,7 @@ export const Post: FC<IPostProps> = ({ post }) => {
             </Typography>
          </CardContent>
          {
-            !data.isWasLoading && <CardActions sx={{ justifyContent: 'flex-end' }}>
+            !data.isWasLoading && <CardActions sx={style.cardAction}>
                <LoadingButton
                   size="small"
                   variant='outlined'
@@ -80,8 +94,8 @@ export const Post: FC<IPostProps> = ({ post }) => {
             </CardActions>
          }
          {
-            data.isWasLoading && <CardContent sx={{ marginLeft: '10%' }}>
-               <CardActions sx={{ justifyContent: 'flex-end' }}>
+            data.isWasLoading && <CardContent sx={style.cardContent}>
+               <CardActions sx={style.cardAction}>
                   <Button
                      size='small'
                      variant='outlined'
@@ -99,3 +113,19 @@ export const Post: FC<IPostProps> = ({ post }) => {
       </Card>
    )
 }
+
+
+const style = {
+   cardHeader: {
+      paddingBottom: 0
+   },
+   textTitle: {
+      fontSize: 16
+   },
+   cardAction: {
+      justifyContent: 'flex-end'
+   },
+   cardContent: {
+      marginLeft: '10%',
+   }
+};

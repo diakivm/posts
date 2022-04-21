@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 
 import { Formik } from 'formik'
 import * as yup from 'yup';
@@ -15,10 +15,15 @@ interface IInitialValues {
    body: string
 }
 
-export const NewPostForm = () => {
+interface INewPostForm {
+   onCloseModal?: Dispatch<SetStateAction<boolean>>
+
+}
+
+export const NewPostForm: FC<INewPostForm> = ({ onCloseModal }) => {
 
    const { user } = useTypeSelector(store => store.auth)
-   const { postPost } = useAction()
+   const { postNewPost } = useAction()
 
    const validationsScheme = yup.object().shape({
       title: yup.string().min(6, 'Title too small').required('Required'),
@@ -26,7 +31,10 @@ export const NewPostForm = () => {
    });
 
    const onSubmitPostPost = (values: IInitialValues) => {
-      postPost(user.id, values.title, values.body)
+      postNewPost(user.id, values.title, values.body)
+
+      if (onCloseModal)
+         onCloseModal(false)
    }
 
    return (

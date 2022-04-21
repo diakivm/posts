@@ -16,7 +16,11 @@ interface ICommentsListProps {
 
 export const CommentsList: FC<ICommentsListProps> = ({ comments, isLoading = false, error = null }) => {
    return (
-      <Grid container spacing={2}>
+      <Grid
+         container
+         spacing={2}
+         direction='column'
+      >
          {
             isLoading ? <Loader /> :
                comments.map((comment) => (

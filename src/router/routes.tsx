@@ -11,12 +11,23 @@ interface IRoute {
 }
 
 export enum routeNames {
-    POSTS = 'posts/',
-    MAIN = '/'
+    POSTS = 'posts/new_posts',
+    MAIN = 'posts/'
 
 }
 
 export const publicRoutes: IRoute[] = [
+    {
+        path: routeNames.POSTS,
+        element: <PostsPage />
+    },
+    {
+        path: routeNames.MAIN,
+        element: <MainPage />
+    },
+]
+
+export const privateRoutes: IRoute[] = [
     {
         path: routeNames.POSTS,
         element: <PostsPage />

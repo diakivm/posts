@@ -13,6 +13,10 @@ import { ThemeProvider } from '@emotion/react';
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    secondary: {
+      light: '#ffb74d',
+      main: '#ffa726',
+    }
   },
 });
 

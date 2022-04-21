@@ -16,7 +16,11 @@ interface IPostListProps {
 
 export const PostList: FC<IPostListProps> = ({ posts, isLoading = false, error = null }) => {
    return (
-      <Grid container spacing={2}>
+      <Grid
+         container
+         spacing={2}
+         direction='column'
+      >
          {
             isLoading ? <Loader /> :
                posts.map((post) => (

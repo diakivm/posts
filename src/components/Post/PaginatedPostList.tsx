@@ -1,5 +1,7 @@
-import { Box } from '@mui/material'
 import React, { FC } from 'react'
+
+import { animateScroll as scroll } from 'react-scroll'
+
 import { useAction } from '../../hooks/useAction'
 import { useTypeSelector } from '../../hooks/useTypeSelector'
 import { CustomPagination } from '../CustomPagination/CustomPagination'
@@ -14,6 +16,7 @@ export const PaginatedPostList: FC = () => {
 
    React.useEffect(() => {
       fetchPosts(currentPage)
+      scroll.scrollToTop()
    }, [currentPage])
 
    return (

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useTypeSelector } from '../hooks/useTypeSelector';
-import { publicRoutes } from "./routes";
+import { privateRoutes, publicRoutes } from "./routes";
 
 const AppRoutes: FC = () => {
 
@@ -18,8 +18,12 @@ const AppRoutes: FC = () => {
                         />
                     })
                     :
-                    <>
-                    </>
+                    privateRoutes.map(item => {
+                        return <Route key={item.path}
+                            path={item.path}
+                            element={item.element}
+                        />
+                    })
             }
         </Routes>
     );

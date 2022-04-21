@@ -24,10 +24,10 @@ export default App;
 const styles = {
   pageContainer: {
     minHeight: 'calc(100vh - 135px)',
-    padding: '20px 0',
+    padding: '20px 10px',
     backgroundColor: 'background.paper'
   },
   stackContainer: {
-    backgroundColor: 'background.default'
+    backgroundColor: 'background.default',
   }
 }

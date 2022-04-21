@@ -5,6 +5,7 @@ import {
     postsActions,
     postsActionEnum,
     setPosts,
+    setPost,
     setPostsIsLoading,
     setPostsError,
     setPostsCurrentPage,
@@ -23,10 +24,15 @@ const setPostsAction = (posts: IPost[]): setPosts => {
         payload: posts
     }
 }
-
-const setIsLoadingAction = (isLoading: boolean): setPostsIsLoading => {
+const setPostAction = (posts: IPost): setPost => {
     return {
-        type: postsActionEnum.SET_IS_LOADING,
+        type: postsActionEnum.SET_POST,
+        payload: posts
+    }
+}
+const setIsPostsLoadingAction = (isLoading: boolean): setPostsIsLoading => {
+    return {
+        type: postsActionEnum.SET_IS_POSTS_LOADING,
         payload: isLoading
     }
 }
@@ -55,28 +61,28 @@ const setTotalPagesAction = (pages: number): setPostsTotalPages => {
 export function fetchPosts(page: number) {
     return async (dispatch: Dispatch<postsActions>) => {
         try {
-            dispatch(setIsLoadingAction(true))
+            dispatch(setIsPostsLoadingAction(true))
 
             const response = await postsService.getPosts(page)
             dispatch(setPostsAction(response.data))
-            dispatch(setTotalPagesAction(11))
+            dispatch(setTotalPagesAction(10))
             dispatch(setCurrentPageAction(page))
 
             await Dalay.wait(1)
         } catch (e) {
             dispatch(setErrorAction((e as Error).toString()))
         } finally {
-            dispatch(setIsLoadingAction(false))
+            dispatch(setIsPostsLoadingAction(false))
         }
     }
 }
 
 
-export function postPost(userId: number, title: string, body: string) {
+export function postNewPost(userId: number, title: string, body: string) {
     return async (dispatch: Dispatch<postsActions>) => {
         try {
             const response = await postsService.postPost(userId, title, body)
-            console.log(response);
+            dispatch(setPostAction(response.data as IPost))
             await Dalay.wait(1)
         } catch (e) {
             dispatch(setErrorAction((e as Error).toString()))

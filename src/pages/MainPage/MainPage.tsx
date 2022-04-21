@@ -7,7 +7,7 @@ export const MainPage: FC = () => {
 
    return (
       <>
-         <Typography variant="h2" color="inherit" component="div">
+         <Typography variant="h3" color='white' component="div">
             Main Page
          </Typography>
       </>

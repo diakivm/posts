@@ -16,18 +16,33 @@ export const Comment: FC<ICommentProps> = ({ comment }) => {
 
 
    return (
-      <Card >
+      <Card sx={style.card}>
          <CardContent>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+            <Typography sx={style.textName} gutterBottom>
                {comment.name}
             </Typography>
-            <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
+            <Typography sx={style.textEmail} gutterBottom>
                {comment.email}
             </Typography>
             <Typography variant="h6" component="div">
                {comment.body}
             </Typography>
          </CardContent>
-      </Card>
+      </Card >
    )
 }
+
+
+const style = {
+   card: {
+      bgcolor: '#202020',
+   },
+   textName: {
+      fontSize: 16,
+      color: "text.secondary"
+   },
+   textEmail: {
+      fontSize: 12,
+      color: "text.secondary"
+   },
+};

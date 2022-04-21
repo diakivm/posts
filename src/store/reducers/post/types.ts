@@ -4,15 +4,16 @@ import { IPost } from "../../../models/IPost"
 export interface postsState {
     posts: IPost[],
     total_pages: number
-    current_page: number,
-    isPostsLoading: boolean,
+    current_page: number
+    isPostsLoading: boolean
     postsError: string | null
 }
 
 
 export enum postsActionEnum {
     SET_POSTS = 'POSTS/SET_POSTS',
-    SET_IS_LOADING = 'POSTS/SET_IS_LOADING',
+    SET_POST = 'POSTS/SET_POST',
+    SET_IS_POSTS_LOADING = 'POSTS/SET_IS_POSTS_LOADING',
     SET_ERROR = 'POSTS/SET_ERROR',
     SET_CURRENT_PAGE = 'POSTS/SET_CURRENT_PAGE',
     SET_TOTAL_PAGES = 'POSTS/SET_TOTAL_PAGES',
@@ -23,6 +24,10 @@ export interface setPosts {
     payload: IPost[]
 }
 
+export interface setPost {
+    type: postsActionEnum.SET_POST,
+    payload: IPost
+}
 
 export interface setPostsError {
     type: postsActionEnum.SET_ERROR,
@@ -35,10 +40,9 @@ export interface setPostsCurrentPage {
 }
 
 export interface setPostsIsLoading {
-    type: postsActionEnum.SET_IS_LOADING,
+    type: postsActionEnum.SET_IS_POSTS_LOADING,
     payload: boolean
 }
-
 export interface setPostsTotalPages {
     type: postsActionEnum.SET_TOTAL_PAGES,
     payload: number
@@ -49,3 +53,4 @@ export type postsActions = setPosts
     | setPostsCurrentPage
     | setPostsIsLoading
     | setPostsTotalPages
+    | setPost
