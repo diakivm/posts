@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { Footer } from './components/Layout/Footer/Footer';
+import { Header } from './components/Layout/Header/Header';
+
+import { Container, Stack } from '@mui/material';
+import AppRoutes from './router/AppRoutes';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Stack sx={styles.stackContainer}>
+      <Header />
+      <Container sx={styles.pageContainer}>
+        <AppRoutes />
+      </Container>
+      <Footer />
+    </Stack>
   );
 }
 
 export default App;
+
+const styles = {
+  pageContainer: {
+    minHeight: 'calc(100vh - 135px)',
+    padding: '20px 0',
+    backgroundColor: 'background.paper'
+  },
+  stackContainer: {
+    backgroundColor: 'background.default'
+  }
+}
