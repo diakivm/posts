@@ -64,7 +64,7 @@ export function fetchPosts(page: number) {
             dispatch(setIsPostsLoadingAction(true))
 
             const response = await postsService.getPosts(page)
-            dispatch(setPostsAction(response.data))
+            dispatch(setPostsAction(response.data as IPost[]))
             dispatch(setTotalPagesAction(10))
             dispatch(setCurrentPageAction(page))
 
